@@ -1,4 +1,4 @@
-import JsonDataStore from './jsonDataStore';
+import JsonDataStore from './JsonDataStore';
 const path = require('path');
 
 /**
