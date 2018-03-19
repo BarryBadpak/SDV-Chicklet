@@ -1,4 +1,5 @@
 import DotNotationAccessor from "../Data/DotNotationAccessor";
+import IDataStore from "../Store-interfaces/IDataStore";
 
 const electron = require('electron');
 const path = require('path');
@@ -6,9 +7,9 @@ const jetpack = require('fs-jetpack');
 
 /**
  * Class JsonDataStore
- * Represents a JSON file data storage in the userData folder 
+ * Represents a JSON file data storage in the userData folder
  */
-class JsonDataStore extends DotNotationAccessor {
+export default class JsonDataStore extends DotNotationAccessor implements IDataStore {
 
     protected _data: { [key: string]: any };
     private _userDataPath: string;
@@ -34,7 +35,7 @@ class JsonDataStore extends DotNotationAccessor {
      * Loads the store file
      * @private
      */
-    _load() {
+    private _load(): void {
 
         // If the store file does not exist create it
         if (jetpack.exists(this._path) !== 'file') {
@@ -48,7 +49,7 @@ class JsonDataStore extends DotNotationAccessor {
     /**
      * Save the store
      */
-    save() {
+    public save(): void {
 
         jetpack.file(this._path, { content: JSON.stringify(this._data) });
     }
@@ -60,7 +61,7 @@ class JsonDataStore extends DotNotationAccessor {
      * @param propertyValue
      * @returns {JsonDataStore}
      */
-    set(propertyPath: string, propertyValue: any = {}) {
+    public set(propertyPath: string, propertyValue: any = {}): ThisType<JsonDataStore> {
 
         super.set(propertyPath, propertyValue);
         this.save();
@@ -72,11 +73,9 @@ class JsonDataStore extends DotNotationAccessor {
      * Clear all of the stores data
      * e.g. in case of an auto update being applied
      */
-    clear() {
+    public clear(): void {
 
         this._data.splice(0, this._data.length);
         this.save();
     }
 }
-
-export default JsonDataStore;

@@ -1,9 +1,11 @@
+import IDotNotationAccessor from "../Data-interfaces/IDotNotationAccessor";
+
 /**
  * Class DotNotationAccessor
  * Provides super classes the ability to access properties from this._data through
  * dot notation
  */
-abstract class DotNotationAccessor {
+export default abstract class DotNotationAccessor implements IDotNotationAccessor {
 
     protected abstract _data: { [key: string]: any };
 
@@ -13,7 +15,7 @@ abstract class DotNotationAccessor {
      * @param propertyPath
      * @returns {*}
      */
-    get(propertyPath: string) {
+    public get(propertyPath: string): any {
 
         return propertyPath.split('.').reduce((accumulator, currentValue) => {
 
@@ -28,7 +30,7 @@ abstract class DotNotationAccessor {
      * @param propertyValue
      * @returns {JsonDataStore}
      */
-    set(propertyPath: string, propertyValue: any = {}) {
+    public set(propertyPath: string, propertyValue: any = {}): ThisType<DotNotationAccessor> {
 
         const propertyParts = propertyPath.split('.');
         const lastPartIndex = propertyParts.length - 1;
@@ -56,7 +58,7 @@ abstract class DotNotationAccessor {
      *
      * @param propertyPath
      */
-    del(propertyPath: string) {
+    public del(propertyPath: string): ThisType<DotNotationAccessor> {
 
         const propertyParts = propertyPath.split('.');
         const lastPartIndex = propertyParts.length - 1;
@@ -78,5 +80,3 @@ abstract class DotNotationAccessor {
         return this;
     }
 }
-
-export default DotNotationAccessor;

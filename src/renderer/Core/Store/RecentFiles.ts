@@ -1,10 +1,12 @@
+import { IRecentFile } from './../Store-interfaces/IRecentFilesStore';
 import JsonDataStore from './JsonDataStore';
+import { IRecentFilesStore } from '../Store-interfaces/IRecentFilesStore';
 const path = require('path');
 
 /**
  * Class RecentFiles
  */
-class RecentFiles {
+export default class RecentFiles implements IRecentFilesStore {
 
     private _store: JsonDataStore;
     private _limit: number;
@@ -27,7 +29,7 @@ class RecentFiles {
         this._limit = this._store.get('limit');
     }
 
-    getLimit() {
+    public getLimit(): number {
 
         return this._limit;
     }
@@ -37,7 +39,7 @@ class RecentFiles {
      *
      * @returns {*|Array}
      */
-    getFiles() {
+    public getFiles(): Array<IRecentFile> {
 
         return this._store.get('files') || [];
     }
@@ -47,7 +49,7 @@ class RecentFiles {
      *
      * @param filePath
      */
-    addFile(filePath: string) {
+    public addFile(filePath: string): void {
 
         let files = this.getFiles(),
             fileName = path.basename(filePath),
@@ -86,10 +88,8 @@ class RecentFiles {
     /**
      * Clear the recent file list
      */
-    clear() {
+    public clear(): void {
 
         this._store.set('files', []);
     }
 }
-
-export default new RecentFiles();

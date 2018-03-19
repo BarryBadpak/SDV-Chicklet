@@ -1,7 +1,8 @@
-import OpenFileDialog from './UI/OpenFileDialog';
-import UiLoader from './UI/Loader';
-import DotNotationAccessor from './Data/DotNotationAccessor';
-import RecentFiles from './Store/RecentFiles';
+import OpenFileDialog from '../UI/OpenFileDialog';
+import UiLoader from '../UI/Loader';
+import DotNotationAccessor from '../Data/DotNotationAccessor';
+import ISave from '../Store-interfaces/ISave';
+import store from '../../app_store';
 
 const jetpack = require('fs-jetpack');
 const xml2js = require('xml2js');
@@ -9,7 +10,7 @@ const xml2js = require('xml2js');
  * Class Save
  * Represents a save file
  */
-class Save extends DotNotationAccessor {
+export default class Save extends DotNotationAccessor implements ISave {
 
     protected _data: { [key: string]: any };
     private _dialog: OpenFileDialog;
@@ -32,7 +33,7 @@ class Save extends DotNotationAccessor {
      *
      * @param filePath
      */
-    openSave(filePath: string | false = false) {
+    public openSave(filePath: string | false = false): void {
 
         const openHandler = (fileNames: string[]) => {
 
@@ -73,7 +74,7 @@ class Save extends DotNotationAccessor {
                         if (!error) {
 
                             this._setSave(lFilePath, obj);
-                            RecentFiles.addFile(lFilePath);
+                            store.getters.getRecentFilesStore.addFile(lFilePath);
                         } else {
 
                             throw error;
@@ -102,7 +103,7 @@ class Save extends DotNotationAccessor {
     /**
      * Save the save file
      */
-    save() {
+    public save(): void {
 
         if (this.hasLoadedSave()) {
 
@@ -125,7 +126,7 @@ class Save extends DotNotationAccessor {
     /**
      * Reload the currently open save
      */
-    reloadSave() {
+    public reloadSave(): void {
 
         if (this.hasLoadedSave()) {
 
@@ -139,7 +140,7 @@ class Save extends DotNotationAccessor {
      * @param propertyPath
      * @returns {*}
      */
-    get(propertyPath: string) {
+    public get(propertyPath: string): any {
 
         propertyPath = `SaveGame.${propertyPath}`;
         return super.get(propertyPath);
@@ -152,7 +153,7 @@ class Save extends DotNotationAccessor {
      * @param propertyValue
      * @returns {JsonDataStore}
      */
-    set(propertyPath: string, propertyValue: any = {}) {
+    public set(propertyPath: string, propertyValue: any = {}): ThisType<Save> {
 
         propertyPath = `SaveGame.${propertyPath}`;
         return super.set(propertyPath, propertyValue);
@@ -164,7 +165,7 @@ class Save extends DotNotationAccessor {
      * @param propertyPath
      * @returns {*}
      */
-    del(propertyPath: string) {
+    public del(propertyPath: string): ThisType<Save> {
 
         propertyPath = `SaveGame.${propertyPath}`;
         return super.del(propertyPath);
@@ -177,7 +178,7 @@ class Save extends DotNotationAccessor {
      * @param name
      * @returns {*}
      */
-    getLocationByName(name: string) {
+    public getLocationByName(name: string): any {
 
         const locations = this.get('locations.GameLocation');
         if (locations) {
@@ -200,7 +201,7 @@ class Save extends DotNotationAccessor {
      * @returns {boolean}
      * @private
      */
-    hasLoadedSave() {
+    public hasLoadedSave(): boolean {
 
         return this._path !== false;
     }
@@ -212,7 +213,7 @@ class Save extends DotNotationAccessor {
      * @param obj
      * @private
      */
-    _setSave(savePath: string, obj: { [key: string]: any }) {
+    private _setSave(savePath: string, obj: { [key: string]: any }) {
 
         this._path = savePath;
         this._data = obj;
@@ -220,5 +221,3 @@ class Save extends DotNotationAccessor {
         console.log(this._data);
     }
 }
-
-export default new Save();

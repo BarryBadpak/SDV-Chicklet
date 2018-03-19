@@ -6,6 +6,7 @@ import VueRouter from 'vue-router';
 import App from './Components/App.vue';
 
 import routes from './app_routes';
+import store from './app_store';
 import Titlebar from './Components/Titlebar.vue';
 import Menu from './Components/Menu.vue';
 
@@ -17,5 +18,6 @@ const router = new VueRouter({ routes });
 new Vue({
   components: { App },
   template: '<App/>',
+  store,
   router
 }).$mount('#app');

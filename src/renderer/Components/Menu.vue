@@ -2,7 +2,7 @@
 	<div id="mainMenu" class="ui brown inverted pointing secondary menu">
 		<div class="ui dropdown item">
 			<i class="content icon"></i>
-			{{ saveObj.get('player.name') }}
+			{{ getSave.get('player.name') }}
 			<div class="menu">
 				<div class="item" v-on:click="openSave">
 					<span class="description">Ctrl+O</span>
@@ -52,55 +52,44 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import Save from "../Core/Save";
-import RecentFiles from "../Core/Store/RecentFiles";
 const MouseTrap = require("mousetrap");
+import ISave from "../Core/Store-interfaces/ISave";
+import { IRecentFilesStore } from "../Core/Store-interfaces/IRecentFilesStore";
 
 @Component
 export default class Menu extends Vue {
-
-  _recentFiles: Array<{ [key: string]: any }> = [];
-
-  constructor() {
-    super();
+  /**
+   * Retrieve the files list from the RecentFiles object from the app_store
+   * @returns {computed.getRecentFiles|(function(*))|store.getters.getRecentFiles|RecentFiles.getRecentFiles}
+   */
+  get getRecentFiles() {
+    return this.getRecentFilesObj.getFiles();
   }
 
-  /**
-   * Retrieves the RecentFiles object from the app_store
-   * @returns RecentFiles
-   */
-  get recentFilesObj() {
-    return RecentFiles;
+  get getRecentFilesObj(): IRecentFilesStore {
+    return (<any>this).$store.getters.getRecentFilesStore;
   }
 
   /**
    * Retrieves the save object from the app_store
-   * @returns Save
+   * @returns {computed.getSave|store.getters.getSave|save}
    */
-  get saveObj() {
-    return Save;
-  }
-
-  /**
-   * Retrieve a list of recent files
-   */
-  get getRecentFiles() {
-    return this._recentFiles ? this._recentFiles : [];
+  get getSave(): ISave {
+    return (<any>this).$store.getters.getSaveStore;
   }
 
   /**
    * Clear the recent files list
    */
   clearRecentFiles() {
-    this.recentFilesObj.clear();
-    Vue.set(this, '_recentFiles', RecentFiles.getFiles());
+    this.getRecentFilesObj.clear();
   }
 
   /**
    * Open the file dialog to open a save file
    */
   openSave() {
-    this.saveObj.openSave();
+    this.getSave.openSave();
   }
 
   /**
@@ -109,26 +98,24 @@ export default class Menu extends Vue {
    * @param recentFile
    */
   openRecentSave(recentFile: File) {
-    this.saveObj.openSave(recentFile.path);
+    this.getSave.openSave(recentFile.path);
   }
 
   /**
    * Reload the currently opened save
    */
   reloadSave() {
-    this.saveObj.reloadSave();
+    this.getSave.reloadSave();
   }
 
   /**
    * Save the file
    */
   save() {
-    this.saveObj.save();
+    this.getSave.save();
   }
 
   mounted() {
-    this._recentFiles = this.recentFilesObj.getFiles();
-
     (<any>$("#mainMenu .dropdown")).dropdown({
       transition: "drop",
       action: "hide"

@@ -10,16 +10,17 @@
 </template>
 <script lang="ts">
 import AppMeta from "../Core/Helpers/AppMeta";
+import Component from "vue-class-component";
+import Vue from "vue";
 
-export default {
-  computed: {
-    /**
-     * Returns AppMeta data
-     * @returns {[key:string]: any}
-     */
-    meta(): { [key: string]: any } {
-      return AppMeta;
-    }
+@Component
+export default class Menu extends Vue {
+  /**
+   * Returns AppMeta data
+   * @returns {[key:string]: any}
+   */
+  get meta(): { [key: string]: any } {
+    return AppMeta;
   }
-};
+}
 </script>
