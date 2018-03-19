@@ -6,7 +6,7 @@ const jetpack = require('fs-jetpack');
 
 /**
  * Class JsonDataStore
- * Represents a JSON file data storage in the userData folder
+ * Represents a JSON file data storage in the userData folder 
  */
 class JsonDataStore extends DotNotationAccessor {
 
