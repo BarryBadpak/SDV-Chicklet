@@ -12,7 +12,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 let rendererConfig = {
     entry: {
         renderer: config.build.rendererEntryPoint,
-        main: config.build.rendererPath + '/style/main.scss'
+        main: config.build.rendererPath + '/Style/main.scss'
     },
     output: {
         filename: '[name].js',
