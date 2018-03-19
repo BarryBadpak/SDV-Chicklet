@@ -11,8 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 let rendererConfig = {
     entry: {
-        renderer: config.build.rendererEntryPoint,
-        main: config.build.rendererPath + '/Style/main.scss'
+        renderer: [config.build.rendererEntryPoint, config.build.rendererPath + '/Style/main.scss']
     },
     output: {
         filename: '[name].js',
@@ -45,6 +44,16 @@ let rendererConfig = {
                 use: 'node-loader'
             },
             {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                use: {
+                    loader: 'url-loader',
+                    query: {
+                        limit: 10000,
+                        name: 'img/[name].[ext]'
+                    }
+                }
+            },
+            {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     use: [{
@@ -52,6 +61,8 @@ let rendererConfig = {
                         options: {
                             sourceMap: true
                         }
+                    }, {
+                        loader: "resolve-url-loader"
                     }, {
                         loader: "sass-loader",
                         options: {
@@ -101,7 +112,6 @@ let rendererConfig = {
                 to: config.build.outputPath
             }
         ]),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
     ],
     node: {
@@ -114,6 +124,10 @@ let rendererConfig = {
  * Adjust rendererConfig for development settings
  */
 if (process.env.NODE_ENV !== 'production') {
+    rendererConfig.plugins.push(
+        new webpack.HotModuleReplacementPlugin()
+    );
+
     rendererConfig.plugins.push(
         new webpack.DefinePlugin({
             '__static': `"${config.build.staticPath.replace(/\\/g, '\\\\')}"`

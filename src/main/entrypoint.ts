@@ -9,12 +9,12 @@ import createBrowserWindow from './Helpers/Window';
  */
 if (process.env.NODE_ENV !== 'development') {
     // tslint:disable-next-line
-    (<any>global).__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+    (<any>global).__static = require('path').join(__dirname, '/').replace(/\\/g, '\\\\')
 }
 
 let mainWindow: BrowserWindow | null;
 const mainWindowUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:9080' : `file://${__dirname}/index.html`;
-console.error(process.env.NODE_ENV);
+
 function createWindow() {
 
     Menu.setApplicationMenu(null);
@@ -32,7 +32,7 @@ function createWindow() {
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
-};
+}
 
 app.on('ready', createWindow);
 

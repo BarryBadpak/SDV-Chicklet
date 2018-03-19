@@ -1,7 +1,7 @@
 const platform = process.platform;
 const url = require('url');
 const titlebarId = 'titlebar';
-const basedir = '/css/img/titlebar/';
+const basedir = 'css/img/titlebar/';
 
 function createButton(type: string) {
 
