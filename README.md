@@ -1,5 +1,4 @@
 <div align="center">
-<br/>
 <h1>Chicklet</h1>
 </div>
 
