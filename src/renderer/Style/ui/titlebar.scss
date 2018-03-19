@@ -1,0 +1,190 @@
+#titlebar {
+	width: 100%;
+	height: 32px;
+	-webkit-user-select: none;
+	cursor: default;
+	pointer-events: none;
+	background: rgb(27, 28, 32);
+	border-bottom:1px solid #484a51;
+}
+
+#titlebar .title {
+	width:100%;
+	height:100%;
+	color: #ececec;
+	padding-left: 15px;
+	line-height:32px;
+	font-size:13px;
+}
+
+#titlebar .title span {
+	text-transform: capitalize;
+}
+
+#titlebar .title img {
+	position: relative;
+	top: 1px;
+	margin-right: 10px;
+}
+
+#titlebar .drag {
+	-webkit-app-region: drag;
+}
+
+#titlebar > .button img {
+	position: absolute;
+	cursor: default;
+	-webkit-app-region: no-drag;
+}
+
+html.darwin #titlebar > .button {
+	display: none;
+}
+
+#titlebar > .button {
+	position: absolute;
+	cursor: default;
+	pointer-events: all;
+	-webkit-app-region: no-drag;
+}
+
+/* no-maximize or no-minimize */
+
+#titlebar.no-minimize > .button-minimize {
+	display: none !important;
+}
+
+#titlebar.no-maximize > .button-maximize {
+	display: none !important;
+}
+
+html[titlebar-platform=linux] #titlebar > .button {
+	top: 5px;
+	width: 16px;
+	height: 16px;
+}
+
+html[titlebar-platform=linux] #titlebar > .button.hover {
+	background-color: rgba(196, 196, 196, 0.4);
+}
+
+html[titlebar-platform=linux] #titlebar > .button:active {
+	background-color: rgba(168, 168, 168, 0.5);
+}
+
+/* normal */
+
+html[titlebar-platform=linux] #titlebar > .button-close {
+	left: 5px;
+}
+
+html[titlebar-platform=linux] #titlebar > .button-maximize {
+	right: 5px;
+}
+
+html[titlebar-platform=linux] #titlebar > .button-minimize {
+	right: 28px;
+}
+
+html[titlebar-platform=linux] #titlebar.no-maximize > .button-minimize {
+	right: 5px;
+}
+
+/* inset */
+
+html[titlebar-platform=linux] #titlebar.inset > .button {
+	top: 12px;
+}
+
+html[titlebar-platform=linux] #titlebar.inset > .button-close {
+	left: 12px;
+}
+
+html[titlebar-platform=linux] #titlebar.inset > .button-maximize {
+	right: 12px;
+}
+
+html[titlebar-platform=linux] #titlebar.inset.no-maximize > .button-minimize {
+	right: 12px;
+}
+
+html[titlebar-platform=linux] #titlebar.inset > .button-minimize {
+	right: 40px;
+}
+
+html[titlebar-platform=win32] #titlebar > .button {
+	top: 0px;
+	width: 45px;
+	height: 32px;
+}
+
+html[titlebar-platform=win32] #titlebar > .button.hover {
+	background-color: rgba(196, 196, 196, 0.4);
+}
+
+html[titlebar-platform=win32] #titlebar > .button:active {
+	background-color: rgba(168, 168, 168, 0.5);
+}
+
+html[titlebar-platform=win32] #titlebar > .button-close {
+	right: 0px;
+}
+
+html[titlebar-platform=win32] #titlebar > .button-close.hover {
+	background-color: #e81123;
+}
+
+html[titlebar-platform=win32] #titlebar > .button-close:active {
+	background-color: rgba(232, 17, 35, 0.6);
+}
+
+html[titlebar-platform=win32] #titlebar > .button img {
+	margin-top: 8.5px;
+	margin-left: 16.5px;
+}
+
+html[titlebar-platform=win32] #titlebar > .button-close.hover img, html[titlebar-platform=win32] #titlebar > .button-close:active img,
+html[titlebar-platform=win32] #titlebar > .button-minimize img, html[titlebar-platform=win32] #titlebar > .button-minimize:active img,
+html[titlebar-platform=win32] #titlebar > .button-close img{
+	-webkit-filter: invert(100%);
+}
+
+html[titlebar-platform=win32] #titlebar > .button-maximize {
+	right: 45px;
+}
+
+html[titlebar-platform=win32] #titlebar > .button-minimize {
+	right: 90px;
+}
+
+html[titlebar-platform=win32] #titlebar.no-maximize > .button-minimize {
+	right: 45px;
+}
+
+/* inset */
+
+html[titlebar-platform=win32] #titlebar.inset > .button img {
+	margin-top: 14px;
+	margin-left: 14px;
+}
+
+html[titlebar-platform=win32] #titlebar.inset > .button {
+	width: 40px;
+	height: 40px;
+}
+
+html[titlebar-platform=win32] #titlebar.inset > .button-maximize {
+	right: 40px;
+}
+
+html[titlebar-platform=win32] #titlebar.inset > .button-minimize {
+	right: 80px;
+}
+
+html[titlebar-platform=win32] #titlebar.inset.no-maximize > .button-minimize {
+	right: 40px;
+}
+
+.ui.secondary.pointing.menu .active.item {
+	font-weight: 400;
+}

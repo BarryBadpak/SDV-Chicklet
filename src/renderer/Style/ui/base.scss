@@ -1,0 +1,87 @@
+body {
+	outline: 1px solid rgb(72, 74, 81);
+	outline-offset: -1px;
+}
+
+#app {
+	height: 100%;
+}
+
+#content-wrapper{
+	height: calc(100% - 32px);
+	position: relative;
+}
+
+#content-view {
+	margin: -1px 0 0 0;
+	border-radius: 0;
+	width: 100%;
+	height: calc(100% - 41px);
+	box-shadow: none;
+	background: url('/css/img/background.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: bottom center;
+	image-rendering: pixelated;
+	border-top: 0;
+}
+
+#ui-loader {
+	width: calc(100% - 2px);
+	height: calc(100% - 1px);
+	left: 1px !important;
+	z-index: 1000;
+	.ui.progress {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: 0;
+		text-align: center;
+		z-index: 1000;
+		-webkit-transform: translateX(-50%) translateY(-50%);
+		transform: translateX(-50%) translateY(-50%);
+		width: 50%;
+		background: rgba(0,0,0,.25);
+
+		.label {
+			color: rgba(255,255,255,.9);
+			margin-top: 1em;
+			font-size: 1.5em;
+		}
+	}
+}
+
+.ui.dimmer {
+	z-index:10;
+}
+
+.ui.segment, .ui.grid.segment {
+	border-radius: 0px;
+}
+
+.dimmed.dimmable>.ui.simple.inverted.dimmer {
+	background-color: rgba(255,255,255,.25);
+}
+
+.blurring.dimmed.dimmable>:not(.dimmer) {
+	-webkit-filter: blur(5px) grayscale(.7);
+	filter: blur(2px) grayscale(.7);
+}
+
+.divider-column {
+	position: relative;
+	padding: 0 !important;
+
+	.ui.vertical.divider.no-text:after, .ui.vertical.divider.no-text:before {
+		height: 100%;
+	}
+}
+
+.ui.header.less-margin { margin-top: 1rem; }
+
+canvas {
+	image-rendering: crisp-edges;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	-ms-interpolation-mode: nearest-neighbor;
+}

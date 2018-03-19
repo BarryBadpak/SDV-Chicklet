@@ -1,0 +1,16 @@
+#mainMenu {
+	margin: 0 1px;
+	border-left: 0;
+	border-right: 0;
+
+	> div.item {
+		> .menu {
+			min-width: 210px;
+
+			.menu {
+
+				min-width: auto;
+			}
+		}
+	}
+}
