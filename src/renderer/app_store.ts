@@ -1,3 +1,6 @@
+import { IRecentFilesStore } from './Core/Store-interfaces/IRecentFilesStore';
+import ISave from './Core/Store-interfaces/ISave';
+import IDataStore from './Core/Store-interfaces/IDataStore';
 import JsonDataStore from './Core/Store/JsonDataStore';
 import RecentFiles from './Core/Store/RecentFiles';
 import Save from './Core/Store/Save';
@@ -22,33 +25,6 @@ const store = new Vuex.Store({
         assets: false
     },
     getters: {
-
-        /**
-         * Return the Settings store
-         * @param state
-         */
-        getSettingsStore: state => state.settings,
-
-        /**
-         * Retrieve the RecentFiles object
-         * @param state
-         * @returns {RecentFiles}
-         */
-        getRecentFilesStore: state => state.recent_files,
-
-        /**
-         * Retrieve the Save object
-         * @param state
-         * @returns {JsonDataStore.save|*|save|{lastScroll, elementScroll, positions}|{focus}|{conditions}}
-         */
-        getSaveStore: state => state.save,
-
-        /**
-         * Retrieve the Assets obj
-         * @param state
-         * @returns {Assets|*|assets|{}|Function|boolean}
-         */
-        getAssets: state => state.assets
     },
     mutations: {
 

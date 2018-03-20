@@ -74,7 +74,7 @@ export default class Save extends DotNotationAccessor implements ISave {
                         if (!error) {
 
                             this._setSave(lFilePath, obj);
-                            store.getters.getRecentFilesStore.addFile(lFilePath);
+                            store.state.recent_files.addFile(lFilePath);
                         } else {
 
                             throw error;
@@ -86,7 +86,7 @@ export default class Save extends DotNotationAccessor implements ISave {
                 .catch((error: Error) => {
 
                     UiLoader.hide();
-                    console.dir(error);
+                    console.error(error);
                     alertify.error(error.message);
                 });
         };

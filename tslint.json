@@ -98,11 +98,11 @@
             "check-operator",
             "check-separator",
             "check-type"
-        ],
-        "linterOptions": {
-            "exclude": [
-                "src/**/*test.ts"
-            ]
-        }
+        ]
+    },
+    "linterOptions": {
+        "exclude": [
+            "src/**/*test.ts"
+        ]
     }
 }

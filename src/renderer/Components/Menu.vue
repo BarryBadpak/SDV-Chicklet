@@ -2,7 +2,7 @@
 	<div id="mainMenu" class="ui brown inverted pointing secondary menu">
 		<div class="ui dropdown item">
 			<i class="content icon"></i>
-			{{ getSave.get('player.name') }}
+			{{ getSaveStore.get('player.name') }}
 			<div class="menu">
 				<div class="item" v-on:click="openSave">
 					<span class="description">Ctrl+O</span>
@@ -59,37 +59,41 @@ import { IRecentFilesStore } from "../Core/Store-interfaces/IRecentFilesStore";
 @Component
 export default class Menu extends Vue {
   /**
-   * Retrieve the files list from the RecentFiles object from the app_store
-   * @returns {computed.getRecentFiles|(function(*))|store.getters.getRecentFiles|RecentFiles.getRecentFiles}
+   * Returns the recent file store
+   * @returns {IRecentFilesStore}
    */
-  get getRecentFiles() {
-    return this.getRecentFilesObj.getFiles();
-  }
-
-  get getRecentFilesObj(): IRecentFilesStore {
-    return (<any>this).$store.getters.getRecentFilesStore;
+  get getRecentFilesStore(): IRecentFilesStore {
+    return (<any>this).$store.state.recent_files;
   }
 
   /**
    * Retrieves the save object from the app_store
-   * @returns {computed.getSave|store.getters.getSave|save}
+   * @returns {ISave}
    */
-  get getSave(): ISave {
-    return (<any>this).$store.getters.getSaveStore;
+  get getSaveStore(): ISave {
+    return (<any>this).$store.state.save;
+  }
+
+  /**
+   * Retrieve the files list from the RecentFiles object from the app_store
+   * @returns {Array<IRecentFile>}
+   */
+  get getRecentFiles() {
+    return this.getRecentFilesStore.getFiles();
   }
 
   /**
    * Clear the recent files list
    */
   clearRecentFiles() {
-    this.getRecentFilesObj.clear();
+    this.getRecentFilesStore.clear();
   }
 
   /**
    * Open the file dialog to open a save file
    */
   openSave() {
-    this.getSave.openSave();
+    this.getSaveStore.openSave();
   }
 
   /**
@@ -98,21 +102,21 @@ export default class Menu extends Vue {
    * @param recentFile
    */
   openRecentSave(recentFile: File) {
-    this.getSave.openSave(recentFile.path);
+    this.getSaveStore.openSave(recentFile.path);
   }
 
   /**
    * Reload the currently opened save
    */
   reloadSave() {
-    this.getSave.reloadSave();
+    this.getSaveStore.reloadSave();
   }
 
   /**
    * Save the file
    */
   save() {
-    this.getSave.save();
+    this.getSaveStore.save();
   }
 
   mounted() {
