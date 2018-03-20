@@ -21,6 +21,26 @@ export default class Color {
         this._packed = packed === null ? this.pack() : packed;
     }
 
+    get packed(): string {
+        return this._packed ? this._packed.toString() : '';
+    }
+
+    get r(): number {
+        return this._r;
+    }
+
+    get g(): number {
+        return this._g;
+    }
+
+    get b(): number {
+        return this._b;
+    }
+
+    get a(): number {
+        return this._a;
+    }
+
     /**
      * Packs RGBA to a uint value
      * @returns {number}

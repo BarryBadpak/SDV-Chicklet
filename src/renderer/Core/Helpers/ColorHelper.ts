@@ -34,7 +34,7 @@ export default class ColorHelper {
      * @param arr
      * @returns {Color|*}
      */
-    public static fromArray(arr: number[]): Color {
+    public static fromArray(arr: number[] | Uint8ClampedArray): Color {
         return new Color(arr[0], arr[1], arr[2], arr[3]);
     }
 }
