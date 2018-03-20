@@ -1,0 +1,39 @@
+#character {
+
+	margin: 0;
+
+	.portrait {
+
+		display: inline-block;
+		width: 128px;
+		height: 192px;
+		background: url('img/ui/character_portrait.png');
+
+		#characterCanvas {
+			width:100%;
+			height:100%;
+		}
+	}
+
+	.ui.input.colorpicker span {
+		display: block;
+		width: 15px;
+		height: 15px;
+		position: absolute;
+		right: 5px;
+		top: 3px;
+	}
+
+	.ui.input {
+		margin-bottom: 1em;
+	}
+
+	.ui.checkbox {
+
+		margin-bottom: 0.5em;
+	}
+
+	.ui.input.last, .ui.checkbox.last {
+		margin-bottom: 0;
+	}
+}

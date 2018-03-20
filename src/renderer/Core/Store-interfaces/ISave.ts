@@ -4,6 +4,5 @@ export default interface ISave extends IDotNotationAccessor {
     openSave(filePath?: string | false): void;
     save(): void;
     reloadSave(): void;
-    getLocationByName(name: string): any;
     hasLoadedSave(): boolean;
 }

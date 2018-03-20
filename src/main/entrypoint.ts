@@ -20,11 +20,11 @@ function createWindow() {
     Menu.setApplicationMenu(null);
 
     mainWindow = createBrowserWindow('main', {
-        height: 600,
-        width: 1000,
-        useContentSize: true,
+        width: 1200,
+        height: 800,
+        frame: false,
+        fullscreenable: false,
         resizable: false,
-        frame: false
     });
 
     mainWindow.loadURL(mainWindowUrl);

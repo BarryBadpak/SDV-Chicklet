@@ -173,29 +173,6 @@ export default class Save extends DotNotationAccessor implements ISave {
     }
 
     /**
-     * Retrieve a location by name
-     *
-     * @param name
-     * @returns {*}
-     */
-    public getLocationByName(name: string): any {
-
-        const locations = this.get('locations.GameLocation');
-        if (locations) {
-
-            for (let i = 0; i < locations.length; i++) {
-
-                if (locations[i].name.toLowerCase() === name.toLowerCase()) {
-
-                    return locations[i];
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Has a save been loaded?
      *
      * @returns {boolean}
