@@ -1,6 +1,8 @@
 import store from "../../app_store";
 import ColorHelper from "../Helpers/ColorHelper";
 import Color from "../Data/Color";
+import JsonDataStore from "../Store/JsonDataStore";
+import IDataStore from "../Store-interfaces/IDataStore";
 
 interface PreviewOptions {
     gender?: string;
@@ -58,9 +60,11 @@ export default class CharacterPreview {
      * Get the Asset store
      * @returns {store.getters.getAssets}
      */
-    get assets() {
+    get assets(): IDataStore {
 
-        return store.state.assets;
+        // @TODO Properly add assets
+        return new JsonDataStore('s');
+        // return store.state.assets;
     }
 
     /**
